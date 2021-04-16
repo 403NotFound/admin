@@ -27,6 +27,7 @@
 </template>
 
 <script>
+import { login } from '@/api/user'
 export default {
   name: 'Login',
   data() {
@@ -40,11 +41,13 @@ export default {
     }
   },
   methods: {
-    handleLogin() {
+    async handleLogin() {
       this.loading = true
-      this.$router.push({
-        path: '/'
-      })
+      const res = await login(this.loginForm)
+      console.log(res)
+      // this.$router.push({
+      //   path: '/'
+      // })
     }
   },
   mounted() {
