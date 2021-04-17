@@ -1,4 +1,4 @@
-import $http from '../utils/request'
+import $http from '../utils/request';
 
 export const login = ({ username, password }) => {
   return $http({
@@ -6,7 +6,7 @@ export const login = ({ username, password }) => {
     method: 'post',
     data: {
       username,
-      password
-    }
+      password,
+    },
   })
-}
+};

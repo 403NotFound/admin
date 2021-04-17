@@ -1,10 +1,11 @@
-import Vue from "vue";
-import VueRouter from "vue-router";
-import Layout from '@/layout/index'
+import Vue from 'vue';
+import VueRouter from 'vue-router';
+import Layout from '@/layout/index';
 
-Vue.use(VueRouter);
+Vue.use(VueRouter)
 
-const routes = [{
+const routes = [
+  {
     path: '/',
     component: Layout,
     redirect: '/dashboard',
@@ -22,14 +23,14 @@ const routes = [{
       {
         path: 'dashboard',
         component: () => import('@/views/dashboard/index'),
-        name: 'Dashboard'
-      }
-    ]
-  }
-];
+        name: 'Dashboard',
+      },
+    ],
+  },
+]
 
 const router = new VueRouter({
   routes,
-});
+})
 
-export default router;
+export default router

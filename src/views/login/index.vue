@@ -1,24 +1,30 @@
 <template>
   <div class="login-container">
-		<el-form 
-      class="login-form" 
-      :label-position="labelPosition" 
-      label-width="80px" 
+    <el-form
+      class="login-form"
+      :label-position="labelPosition"
+      label-width="80px"
       :model="loginForm"
+      ref="loginForm"
+      :rules="loginRules"
     >
       <div class="title-container">
         <h3 class="title">Login Form</h3>
       </div>
-      <el-form-item label="账号">
+      <el-form-item label="账号" prop="username">
         <el-input ref="username" v-model="loginForm.username"></el-input>
       </el-form-item>
-      <el-form-item label="密码">
-        <el-input ref="password" v-model="loginForm.password" show-password></el-input>
+      <el-form-item label="密码" prop="password">
+        <el-input
+          ref="password"
+          v-model="loginForm.password"
+          show-password
+        ></el-input>
       </el-form-item>
       <el-button
         :loading="loading"
         type="primary"
-        style="width:100%;margin-bottom:30px;"
+        style="width: 100%; margin-bottom: 30px"
         @click.native.prevent="handleLogin"
         >Login</el-button
       >
@@ -27,28 +33,64 @@
 </template>
 
 <script>
-import { login } from '@/api/user'
+import { mapActions } from 'vuex';
 export default {
   name: 'Login',
   data() {
+    // 自定义校验规则
+    const validateUsername = (rule, value, callback) => {
+      if (value !== 'admin') {
+        callback(new Error('Please enter the correct user name'))
+      } else {
+        callback()
+      }
+    }
+    const validatePassword = (rule, value, callback) => {
+      if (value.length < 5) {
+        callback(new Error('The password can not be less than 5 digits'))
+      } else {
+        callback()
+      }
+    }
     return {
       labelPosition: 'right',
       loginForm: {
         username: 'admin',
         password: 'admin',
       },
-      loading: false
+      loading: false,
+      loginRules: {
+        username: [
+          { required: true, trigger: 'blur', validator: validateUsername },
+        ],
+        password: [
+          { required: true, trigger: 'blur', validator: validatePassword },
+        ],
+      },
     }
   },
   methods: {
-    async handleLogin() {
-      this.loading = true
-      const res = await login(this.loginForm)
-      console.log(res)
-      // this.$router.push({
-      //   path: '/'
-      // })
-    }
+    handleLogin() {
+      this.$refs.loginForm.validate(async (valid) => {
+        if (valid) {
+          this.loading = true
+          const res = await this.actionLogin(this.loginForm)
+          if (res.token) {
+            this.$message({
+              message: '登录成功！',
+              type: 'success',
+            })
+            this.$router.push({
+              path: '/',
+            })
+          }
+        } else {
+          console.log('error submit!!');
+          return false
+        }
+      })
+    },
+    ...mapActions(['actionLogin']),
   },
   mounted() {
     if (this.loginForm.username === '') {
@@ -57,7 +99,7 @@ export default {
     if (this.loginForm.password === '') {
       this.$refs.password.focus()
     }
-  }
+  },
 }
 </script>
 
@@ -97,9 +139,9 @@ export default {
 
 <style lang="scss" scoped>
 .login-container {
-	width: 100%;
-	min-height: 100vh;
-	background: $bg;
+  width: 100%;
+  min-height: 100vh;
+  background: $bg;
   .login-form {
     width: 520px;
     max-width: 100%;

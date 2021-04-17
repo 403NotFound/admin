@@ -6,17 +6,15 @@
 </template>
 
 <script>
-import SideBar from './components/sidebar'
-import AppMain from './components/AppMain'
+import SideBar from './components/sidebar';
+import AppMain from './components/AppMain';
 export default {
   name: 'Layout',
   components: {
     SideBar,
-    AppMain
-  }
+    AppMain,
+  },
 }
 </script>
 
-<style lang='scss' scoped>
-
-</style>
+<style lang="scss" scoped></style>

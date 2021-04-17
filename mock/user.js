@@ -1,6 +1,11 @@
 const users = {
   username: 'admin',
-  password: 'admin'
+  password: 'admin',
 }
 
-module.exports = users
+const token = 'admin-token'
+
+module.exports = {
+  users,
+  token,
+}
