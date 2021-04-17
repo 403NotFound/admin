@@ -1,5 +1,5 @@
-import { login } from '@/api/user';
-import { setToken } from 'utils/auth';
+import { login } from '@/api/user'
+import { setToken } from 'utils/auth'
 
 export const actionLogin = ({ commit }, userInfo) => {
   const { username, password } = userInfo
@@ -14,6 +14,6 @@ export const actionLogin = ({ commit }, userInfo) => {
       })
       .catch((err) => {
         reject(err)
-      });
+      })
   })
-};
+}

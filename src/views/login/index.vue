@@ -33,7 +33,7 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex';
+import { mapActions } from 'vuex'
 export default {
   name: 'Login',
   data() {
@@ -85,7 +85,7 @@ export default {
             })
           }
         } else {
-          console.log('error submit!!');
+          console.log('error submit!!')
           return false
         }
       })
