@@ -10,7 +10,7 @@ NProgress.configure({ showSpinner: false }) // 关闭右上角转圈loading
 router.beforeEach(async (to, from, next) => {
   NProgress.start()
   const hasToken = getToken()
-
+  console.log(hasToken)
   if (hasToken) {
     if (to.path === '/login') {
       next({ path: '/' })
@@ -37,8 +37,10 @@ router.beforeEach(async (to, from, next) => {
   } else {
     if (whiteRouteList.indexOf(to.path) !== -1) {
       next()
+    } else {
+      next({ path: '/login' })
+      NProgress.done()
     }
-    next()
   }
 })
 
