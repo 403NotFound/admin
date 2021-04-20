@@ -10,7 +10,6 @@ NProgress.configure({ showSpinner: false }) // 关闭右上角转圈loading
 router.beforeEach(async (to, from, next) => {
   NProgress.start()
   const hasToken = getToken()
-  console.log(hasToken)
   if (hasToken) {
     if (to.path === '/login') {
       next({ path: '/' })
@@ -32,12 +31,13 @@ router.beforeEach(async (to, from, next) => {
         }
       }
     }
-    next()
     // TODO: 登录权限路由访问
   } else {
+    // 若未登录状态下访问白名单中的路由则直接放行
     if (whiteRouteList.indexOf(to.path) !== -1) {
       next()
     } else {
+      // 否则则强制跳转回登录页
       next({ path: '/login' })
       NProgress.done()
     }
