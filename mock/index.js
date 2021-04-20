@@ -1,4 +1,5 @@
 const Mock = require('mockjs')
-const { users, token } = require('./user')
+const { users, token, userInfo } = require('./user')
 
-Mock.mock('/api/login', 'post', { users, token })
+Mock.mock('/api/user/login', 'post', { users, token })
+Mock.mock('/api/user/info', 'get', userInfo[token])

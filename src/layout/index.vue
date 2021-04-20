@@ -35,6 +35,7 @@ export default {
     width: $sideBarWidth;
     min-height: 100%;
     overflow: scroll;
+    background: $subMenuBg;
   }
   .main-container {
     flex: 1;
