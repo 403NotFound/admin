@@ -2,6 +2,7 @@
   <div>
     <el-scrollbar wrap-class="scrollbar-wrapper">
       <el-menu
+        :collapse="isCollapse"
         :default-active="activeMenu"
         class="menu-container"
         background-color="#1f2d3d"
@@ -41,6 +42,11 @@ export default {
       console.log(path)
       return path
     },
+  },
+  data() {
+    return {
+      isCollapse: false,
+    }
   },
   mounted() {
     console.log(this.$store.state.routes)

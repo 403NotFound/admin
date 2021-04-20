@@ -1,7 +1,5 @@
 <template>
-  <div class="dashboard-container">
-    <p v-for="n in 100" :key="n">{{ n }}</p>
-  </div>
+  <div class="dashboard-container">dashboard</div>
 </template>
 
 <script>
@@ -13,7 +11,6 @@ export default {
 <style lang="scss" scoped>
 .dashboard-container {
   width: 100%;
-  background: skyblue;
   height: 100%;
 }
 </style>

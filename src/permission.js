@@ -1,15 +1,20 @@
 import router from './router'
 import { getToken } from 'utils/auth'
 import store from './store'
+import NProgress from 'nprogress'
+import 'nprogress/nprogress.css'
 
 const whiteRouteList = ['/login']
+NProgress.configure({ showSpinner: false }) // 关闭右上角转圈loading
 
 router.beforeEach(async (to, from, next) => {
+  NProgress.start()
   const hasToken = getToken()
 
   if (hasToken) {
     if (to.path === '/login') {
       next({ path: '/' })
+      NProgress.done()
     } else {
       const hasRoles = store.getters.roles && store.getters.roles.length > 0
       if (hasRoles) {
@@ -35,4 +40,8 @@ router.beforeEach(async (to, from, next) => {
     }
     next()
   }
+})
+
+router.afterEach(() => {
+  NProgress.done()
 })

@@ -6,6 +6,7 @@ const state = {
   avatar: '',
   introduction: '',
   routes: [],
+  sidebarOpend: true,
 }
 
 export default state

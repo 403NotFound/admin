@@ -1,6 +1,6 @@
 <template>
   <div class="layout-cantainer">
-    <side-bar class="sidebar-container" />
+    <side-bar class="sidebar-container" :style="sidebarWidth" />
     <div class="main-container">
       <app-main />
     </div>
@@ -10,8 +10,17 @@
 <script>
 import SideBar from './components/sidebar'
 import AppMain from './components/AppMain'
+import { mapGetters } from 'vuex'
 export default {
   name: 'Layout',
+  computed: {
+    sidebarWidth() {
+      if (!this.sidebar_opend) {
+        return 'width: 56px'
+      }
+    },
+    ...mapGetters(['sidebar_opend']),
+  },
   components: {
     SideBar,
     AppMain,
@@ -34,7 +43,8 @@ export default {
   .sidebar-container {
     width: $sideBarWidth;
     min-height: 100%;
-    overflow: scroll;
+    overflow-y: scroll;
+    overflow-x: hidden;
     background: $subMenuBg;
   }
   .main-container {
