@@ -49,7 +49,7 @@ export default {
     min-height: 100%;
     overflow-y: scroll;
     overflow-x: hidden;
-    background: $subMenuBg;
+    background: $menuBg;
     // reset element-ui css
     .horizontal-collapse-transition {
       transition: 0s width ease-in-out, 0s padding-left ease-in-out,

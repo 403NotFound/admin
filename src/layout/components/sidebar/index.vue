@@ -5,7 +5,7 @@
         :collapse="!sidebar_opend"
         :default-active="activeMenu"
         class="menu-container"
-        background-color="#1f2d3d"
+        background-color="#304156"
         active-text-color="#409EFF"
         text-color="#bfcdb9"
         mode="vertical"
