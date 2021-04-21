@@ -93,12 +93,14 @@ export const constantRoutes = [
     path: '/deep',
     component: Layout,
     meta: { title: 'Deep', icon: 'folder' },
+    redirect: '/deep/deep1/deep1',
     children: [
       {
         path: 'deep1',
         component: () => import('@/views/deep/index'),
         name: 'Deep1',
         meta: { title: 'Deep1' },
+        redirect: '/deep/deep1/deep1',
         children: [
           {
             path: 'deep1',

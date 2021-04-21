@@ -55,7 +55,12 @@ export default {
       return name.trim().toLocaleLowerCase() === 'Dashboard'.toLocaleLowerCase()
     },
     handleLink(item) {
-      console.log(item)
+      const { path, redirect } = item
+      if (redirect) {
+        this.$router.push(redirect)
+        return
+      }
+      this.$router.push(path)
     },
   },
 }
