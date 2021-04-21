@@ -17,6 +17,9 @@ const mutations = {
   SET_ROUTES: (state, routes) => {
     state.routes = routes
   },
+  SET_SIDEBAR_OPENED: (state) => {
+    state.sidebarOpend = !state.sidebarOpend
+  },
 }
 
 export default mutations

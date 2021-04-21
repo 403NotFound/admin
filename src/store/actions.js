@@ -41,3 +41,7 @@ export const generateRoutes = ({ commit, state }) => {
     resolve(accessRoutes)
   })
 }
+
+export const changeSideBarStates = ({ commit }) => {
+  commit('SET_SIDEBAR_OPENED')
+}

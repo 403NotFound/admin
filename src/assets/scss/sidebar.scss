@@ -1,0 +1,14 @@
+#app {
+  .hidden-sidebar {
+    .el-submenu {
+      overflow: hidden;
+
+      .el-submenu__icon-arrow {
+        display: none;
+      }
+      .el-submenu__title span {
+        display: none;
+      }
+    }
+  }
+}

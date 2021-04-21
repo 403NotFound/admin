@@ -1,8 +1,8 @@
 <template>
-  <div>
+  <div class="sidebar-container">
     <el-scrollbar wrap-class="scrollbar-wrapper">
       <el-menu
-        :collapse="isCollapse"
+        :collapse="!sidebar_opend"
         :default-active="activeMenu"
         class="menu-container"
         background-color="#1f2d3d"
@@ -30,7 +30,7 @@ export default {
     SidebarItem,
   },
   computed: {
-    ...mapGetters(['permission_routes']),
+    ...mapGetters(['permission_routes', 'sidebar_opend']),
     activeMenu() {
       const route = this.$route
       const { meta, path } = route
@@ -39,13 +39,12 @@ export default {
         return meta.activeMenu
       }
 
-      console.log(path)
       return path
     },
   },
   data() {
     return {
-      isCollapse: false,
+      isCollapse: true,
     }
   },
   mounted() {
@@ -55,10 +54,20 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.scrollbar-wrapper {
-  overflow-x: hidden !important;
-  .menu-container {
-    border-right: 0;
+.sidebar-container {
+  .scrollbar-wrapper {
+    overflow-x: hidden !important;
+    .el-menu {
+      width: 100% !important;
+      height: 100%;
+      border: none;
+    }
+    .el-menu-collapse {
+      width: 56px !important;
+    }
+    .menu-container {
+      border-right: 0;
+    }
   }
 }
 </style>

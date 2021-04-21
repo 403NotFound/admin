@@ -1,7 +1,8 @@
 <template>
-  <div class="layout-cantainer">
+  <div class="layout-cantainer" :class="!sidebar_opend ? 'hidden-sidebar' : ''">
     <side-bar class="sidebar-container" :style="sidebarWidth" />
     <div class="main-container">
+      <nav-bar />
       <app-main />
     </div>
   </div>
@@ -10,6 +11,7 @@
 <script>
 import SideBar from './components/sidebar'
 import AppMain from './components/AppMain'
+import NavBar from './components/navbar'
 import { mapGetters } from 'vuex'
 export default {
   name: 'Layout',
@@ -24,6 +26,7 @@ export default {
   components: {
     SideBar,
     AppMain,
+    NavBar,
   },
 }
 </script>
@@ -41,11 +44,17 @@ export default {
   display: flex;
   overflow: hidden;
   .sidebar-container {
+    transition: width 0.28s;
     width: $sideBarWidth;
     min-height: 100%;
     overflow-y: scroll;
     overflow-x: hidden;
     background: $subMenuBg;
+    // reset element-ui css
+    .horizontal-collapse-transition {
+      transition: 0s width ease-in-out, 0s padding-left ease-in-out,
+        0s padding-right ease-in-out;
+    }
   }
   .main-container {
     flex: 1;

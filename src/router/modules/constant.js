@@ -67,6 +67,7 @@ export const constantRoutes = [
     path: '/permission',
     component: Layout,
     meta: { title: 'Permission', icon: 'folder' },
+    redirect: '/permission/admin',
     children: [
       {
         path: 'admin',
