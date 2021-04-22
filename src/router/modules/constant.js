@@ -31,103 +31,30 @@
 
 import Layout from '@/layout/index'
 
-export const constantRoutes = [
-  {
-    path: '/login',
-    name: 'Login',
-    component: () => import('@/views/login'),
-    hidden: true,
-  },
-  {
-    path: '/',
-    component: Layout,
-    redirect: '/dashboard',
-    children: [
-      {
-        path: 'dashboard',
-        component: () => import('@/views/dashboard/index'),
-        name: 'Dashboard',
-        meta: { title: 'Dashboard', icon: 'folder', affix: true },
-      },
-    ],
-  },
-  {
-    path: '/documentation',
-    component: Layout,
-    children: [
-      {
-        path: 'index',
-        component: () => import('@/views/documentation/index'),
-        name: 'Documentation',
-        meta: { title: 'Documentation', icon: 'folder', affix: true },
-      },
-    ],
-  },
+export const asyncRoutes = [
   {
     path: '/permission',
     component: Layout,
-    meta: { title: 'Permission', icon: 'folder' },
+    meta: { title: 'Permission', icon: 's-tools', roles: ['admin', 'editor'] },
     redirect: '/permission/admin',
     children: [
       {
         path: 'admin',
         component: () => import('@/views/permission/admin/index'),
         name: 'AdminPermission',
-        meta: { title: 'admin Permission' },
+        meta: { title: 'admin Permission', roles: ['admin'] },
       },
       {
         path: 'editor',
         component: () => import('@/views/permission/editor/index'),
         name: 'EditorPermission',
-        meta: { title: 'editor Permission' },
+        meta: { title: 'editor Permission', roles: ['editor'] },
       },
       {
         path: 'testUser',
         component: () => import('@/views/permission/testUser/index'),
         name: 'TestPermission',
-        meta: { title: 'testUser Permission' },
-      },
-    ],
-  },
-  {
-    path: '/deep',
-    component: Layout,
-    meta: { title: 'Deep', icon: 'folder' },
-    redirect: '/deep/deep1/deep1',
-    children: [
-      {
-        path: 'deep1',
-        component: () => import('@/views/deep/index'),
-        name: 'Deep1',
-        meta: { title: 'Deep1' },
-        redirect: '/deep/deep1/deep1',
-        children: [
-          {
-            path: 'deep1',
-            component: () => import('@/views/deep/deep1/index'),
-            name: 'deep1',
-            meta: { title: 'deep1' },
-          },
-          {
-            path: 'deep2',
-            component: () => import('@/views/deep/deep2/index'),
-            name: 'deep2',
-            meta: { title: 'deep2' },
-          },
-        ],
-      },
-      {
-        path: 'deep3',
-        component: () => import('@/views/deep/deep3/index'),
-        name: 'deep3',
-        meta: { title: 'deep3' },
-      },
-
-      {
-        path: 'deep4',
-        component: () => import('@/views/deep/deep3/index'),
-        name: 'deep4',
-        meta: { title: 'deep4' },
+        meta: { title: 'testUser Permission', roles: ['admin', 'editor'] },
       },
     ],
   },

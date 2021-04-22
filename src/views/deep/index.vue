@@ -1,6 +1,5 @@
 <template>
   <div>
-    deep
     <router-view></router-view>
   </div>
 </template>

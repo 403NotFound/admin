@@ -18,7 +18,9 @@ export default {
   computed: {
     sidebarWidth() {
       if (!this.sidebar_opend) {
-        return 'width: 56px'
+        return 'width: 56px;'
+      } else {
+        return ''
       }
     },
     ...mapGetters(['sidebar_opend']),

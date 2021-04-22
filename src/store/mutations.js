@@ -1,3 +1,5 @@
+import { constantRoutes } from '@/router'
+
 const mutations = {
   SET_TOKEN: (state, token) => {
     state.token = token
@@ -15,7 +17,7 @@ const mutations = {
     state.roles = roles
   },
   SET_ROUTES: (state, routes) => {
-    state.routes = routes
+    state.routes = constantRoutes.concat(routes)
   },
   SET_SIDEBAR_OPENED: (state) => {
     state.sidebarOpend = !state.sidebarOpend

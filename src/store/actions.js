@@ -1,6 +1,6 @@
 import { login, getInfo } from '@/api/user'
 import { setToken } from 'utils/auth'
-import { constantRoutes } from '@/router/modules/constant'
+import { asyncRoutes } from '@/router/modules/constant'
 
 export const actionLogin = ({ commit }, userInfo) => {
   const { username, password } = userInfo
@@ -34,11 +34,40 @@ export const getUserInfo = ({ commit, state }) => {
   })
 }
 
-export const generateRoutes = ({ commit, state }) => {
+function hasPermission(roles, route) {
+  if (route.meta && route.meta.roles) {
+    return roles.some((role) => route.meta.roles.includes(role))
+  } else {
+    return true
+  }
+}
+
+export function filterAsyncRoutes(routes, roles) {
+  const res = []
+  routes.forEach((route) => {
+    const tmp = { ...route }
+    if (hasPermission(roles, tmp)) {
+      if (tmp.children) {
+        tmp.children = filterAsyncRoutes(tmp.children, roles)
+      }
+      console.log(tmp)
+      res.push(tmp)
+    }
+  })
+
+  return res
+}
+
+export const generateRoutes = ({ commit }, roles) => {
   return new Promise((resolve) => {
-    let accessRoutes = constantRoutes
-    commit('SET_ROUTES', accessRoutes)
-    resolve(accessRoutes)
+    let accessedRoutes
+    if (roles.includes('admin')) {
+      accessedRoutes = asyncRoutes || []
+    } else {
+      accessedRoutes = filterAsyncRoutes(asyncRoutes, roles)
+    }
+    commit('SET_ROUTES', accessedRoutes)
+    resolve(accessedRoutes)
   })
 }
 
