@@ -1,6 +1,7 @@
-import { login, getInfo } from '@/api/user'
-import { setToken } from 'utils/auth'
+import { login, getInfo, logout } from '@/api/user'
+import { setToken, removeToken } from 'utils/auth'
 import { asyncRoutes } from '@/router/modules/constant'
+import { resetRouter } from '@/router'
 
 export const actionLogin = ({ commit }, userInfo) => {
   const { username, password } = userInfo
@@ -73,4 +74,20 @@ export const generateRoutes = ({ commit }, roles) => {
 
 export const changeSideBarStates = ({ commit }) => {
   commit('SET_SIDEBAR_OPENED')
+}
+
+export const actionLogout = ({ commit, state }) => {
+  return new Promise((resolve, reject) => {
+    logout(state.token)
+      .then((res) => {
+        if (res.data.code === 200) {
+          commit('SET_TOKEN', '')
+          commit('SET_ROLES', [])
+          removeToken() // 移除 token
+          resetRouter() // 重置路由
+          resolve()
+        }
+      })
+      .catch((err) => reject(err))
+  })
 }

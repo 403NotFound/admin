@@ -9,3 +9,7 @@ export const getToken = () => {
 export const setToken = (token) => {
   Cookies.set(TokenKey, token)
 }
+
+export function removeToken() {
+  return Cookies.remove(TokenKey)
+}

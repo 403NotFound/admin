@@ -18,3 +18,11 @@ export const getInfo = (token) => {
     data: { token },
   })
 }
+
+export const logout = (token) => {
+  return $http({
+    url: '/user/logout',
+    method: 'post',
+    data: { token },
+  })
+}
